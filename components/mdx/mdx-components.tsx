@@ -72,6 +72,23 @@ export const mdxComponents: MDXComponents = {
     />
   ),
   hr: () => <hr className="my-8 border-(--color-border)" />,
+  table: (props) => (
+    <div className="my-6 overflow-x-auto rounded-xl border border-(--color-border)">
+      <table className="w-full text-sm" {...props} />
+    </div>
+  ),
+  thead: (props) => (
+    <thead className="bg-(--color-bg-secondary) text-left text-(--color-text)" {...props} />
+  ),
+  th: (props) => (
+    <th className="px-4 py-3 font-semibold border-b border-(--color-border)" {...props} />
+  ),
+  td: (props) => (
+    <td className="px-4 py-3 border-b border-(--color-border) text-(--color-text-secondary)" {...props} />
+  ),
+  tr: (props) => (
+    <tr className="transition-colors hover:bg-(--color-bg-secondary)/50" {...props} />
+  ),
   strong: (props) => (
     <strong className="font-semibold text-(--color-text)" {...props} />
   ),

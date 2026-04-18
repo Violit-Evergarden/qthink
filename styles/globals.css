@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
+/* Light theme (default) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-card: #ffffff;
+  --color-text: #1a1a2e;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-border: #e5e7eb;
+  --color-accent: #6366f1;
+  --color-accent-hover: #4f46e5;
+  --color-accent-light: #eef2ff;
+  --color-gradient-from: #6366f1;
+  --color-gradient-via: #8b5cf6;
+  --color-gradient-to: #ec4899;
+  --color-card-shadow: rgba(0, 0, 0, 0.08);
+  --color-card-shadow-hover: rgba(0, 0, 0, 0.15);
+}
+
+/* Dark theme */
+.dark {
+  --color-bg: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-bg-card: #1e293b;
+  --color-text: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-border: #334155;
+  --color-accent: #818cf8;
+  --color-accent-hover: #a5b4fc;
+  --color-accent-light: rgba(99, 102, 241, 0.15);
+  --color-gradient-from: #818cf8;
+  --color-gradient-via: #a78bfa;
+  --color-gradient-to: #f472b6;
+  --color-card-shadow: rgba(0, 0, 0, 0.3);
+  --color-card-shadow-hover: rgba(0, 0, 0, 0.5);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--color-bg);
+  --color-bg-secondary: var(--color-bg-secondary);
+  --color-bg-card: var(--color-bg-card);
+  --color-text: var(--color-text);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-light: var(--color-accent-light);
+  --color-gradient-from: var(--color-gradient-from);
+  --color-gradient-via: var(--color-gradient-via);
+  --color-gradient-to: var(--color-gradient-to);
+  --color-card-shadow: var(--color-card-shadow);
+  --color-card-shadow-hover: var(--color-card-shadow-hover);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Inter", "Noto Sans SC", system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: var(--color-accent-light);
+  color: var(--color-accent);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-text-muted);
+  border-radius: 4px;
+}
+
+/* Code block overrides for rehype-pretty-code */
+[data-rehype-pretty-code-figure] pre {
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  overflow-x: auto;
+}
+
+[data-rehype-pretty-code-figure] code {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+[data-rehype-pretty-code-figure] [data-line] {
+  padding: 0 1rem;
+  margin: 0 -1rem;
+}
+
+[data-rehype-pretty-code-figure] [data-highlighted-line] {
+  background-color: var(--color-accent-light);
+}
+
+/* Inline code */
+:not(pre) > code {
+  background-color: var(--color-bg-secondary);
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
 }

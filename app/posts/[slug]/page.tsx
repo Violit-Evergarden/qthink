@@ -73,7 +73,7 @@ export default async function PostPage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-12">
-      <div className="flex gap-12">
+      <div className="relative xl:flex xl:gap-12">
         {/* Main content */}
         <article className="min-w-0 flex-1">
           {/* Post header */}
@@ -85,7 +85,7 @@ export default async function PostPage({ params }: PageProps) {
               <span className="text-sm text-(--color-text-muted)">{formatDate(post.date)}</span>
               <span className="text-sm text-(--color-text-muted)">{post.readingTime}</span>
             </div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
               {post.title}
             </h1>
             {post.tags.length > 0 && (
@@ -146,8 +146,8 @@ export default async function PostPage({ params }: PageProps) {
           </nav>
         </article>
 
-        {/* TOC sidebar */}
-        <aside className="w-56 shrink-0">
+        {/* TOC sidebar - hidden below xl */}
+        <aside className="hidden xl:block w-56 shrink-0">
           <TableOfContents headings={headings} />
         </aside>
       </div>

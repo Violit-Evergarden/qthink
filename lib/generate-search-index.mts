@@ -1,7 +1,6 @@
-import { readFileSync, writeFileSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "fs";
 import { join } from "path";
 import matter from "gray-matter";
-import { globSync } from "glob";
 
 const contentDir = join(process.cwd(), "content/posts");
 const outputPath = join(process.cwd(), "public/search-index.json");
@@ -15,7 +14,7 @@ interface SearchEntry {
   date: string;
 }
 
-const files = globSync("**/*.mdx", { cwd: contentDir });
+const files = readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
 const index: SearchEntry[] = [];
 
 for (const file of files) {

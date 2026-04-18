@@ -4,6 +4,20 @@ import { compareDesc } from "date-fns";
 import { PostCard } from "@/components/posts/post-card";
 import { PostList } from "@/components/posts/post-list";
 import { categoryMap } from "@/lib/utils";
+import { siteConfig } from "@/lib/constants";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: siteConfig.url,
+  description: siteConfig.description,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${siteConfig.url}/search?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
 
 export default function HomePage() {
   const posts = allPosts
@@ -14,7 +28,12 @@ export default function HomePage() {
   const latestPosts = posts.slice(0, 6);
 
   return (
-    <div className="mx-auto max-w-5xl px-6">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="mx-auto max-w-5xl px-6">
       {/* Hero Section */}
       <section className="relative overflow-hidden rounded-3xl py-10 px-8 my-8">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-(--color-gradient-from)/10 via-(--color-gradient-via)/5 to-transparent" />
@@ -80,5 +99,6 @@ export default function HomePage() {
         />
       </section>
     </div>
+    </>
   );
 }

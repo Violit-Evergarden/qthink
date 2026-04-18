@@ -4,6 +4,7 @@ import Image from "next/image";
 import { allPosts } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
 import { formatDate, categoryMap } from "@/lib/utils";
+import { siteConfig } from "@/lib/constants";
 import { MdxContent } from "@/components/mdx/mdx-content";
 import { TableOfContents } from "@/components/ui/toc";
 import type { Metadata } from "next";
@@ -44,14 +45,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
+  const url = `${siteConfig.url}/posts/${post.slug}`;
   return {
     title: post.title,
     description: post.description,
+    alternates: { canonical: `/posts/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
       publishedTime: post.date,
+      url,
+      authors: [siteConfig.author],
+      tags: post.tags,
+      ...(post.cover ? { images: [{ url: post.cover }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
     },
   };
 }
@@ -71,8 +83,24 @@ export default async function PostPage({ params }: PageProps) {
   const prevPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    author: { "@type": "Person", name: siteConfig.author },
+    url: `${siteConfig.url}/posts/${post.slug}`,
+    ...(post.cover ? { image: post.cover } : {}),
+  };
+
   return (
-    <div className="mx-auto max-w-5xl px-6 py-12">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="mx-auto max-w-5xl px-6 py-12">
       <div className="relative xl:flex xl:gap-12">
         {/* Main content */}
         <article className="min-w-0 flex-1">
@@ -152,5 +180,6 @@ export default async function PostPage({ params }: PageProps) {
         </aside>
       </div>
     </div>
+    </>
   );
 }

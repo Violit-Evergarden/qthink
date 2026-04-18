@@ -1,3 +1,4 @@
+import { siteConfig } from "@/lib/constants";
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
@@ -5,7 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/search"],
     },
-    sitemap: "https://qthink.dev/sitemap.xml",
+    sitemap: `${siteConfig.url}/sitemap.xml`,
   };
 }

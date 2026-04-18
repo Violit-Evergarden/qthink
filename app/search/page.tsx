@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "搜索",
   description: "搜索 qthink 博客中的所有文章",
+  robots: { index: false, follow: true },
 };
 
 export default function SearchPage() {

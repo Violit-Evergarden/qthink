@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `#${decoded} — 标签`,
     description: `qthink 博客中标记「${decoded}」的所有文章`,
+    robots: { index: false, follow: true },
   };
 }
 

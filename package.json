@@ -12,6 +12,7 @@
     "generate-search": "tsx lib/generate-search-index.mts"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
     "contentlayer2": "^0.5.8",
     "date-fns": "^4.1.0",

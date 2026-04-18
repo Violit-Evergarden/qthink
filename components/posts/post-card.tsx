@@ -26,9 +26,9 @@ export function PostCard({
   const cat = categoryMap[category] ?? { label: category, color: "bg-gray-100 text-gray-700" };
 
   return (
-    <Link href={`/posts/${slug}`} className="group block">
+    <Link href={`/posts/${slug}`} className="group block h-full">
       <article
-        className={`overflow-hidden rounded-2xl border border-(--color-border) bg-(--color-bg-card) shadow-[0_2px_8px_var(--color-card-shadow)] transition-all duration-300 hover:shadow-[0_8px_24px_var(--color-card-shadow-hover)] hover:-translate-y-1 ${
+        className={`flex h-full flex-col overflow-hidden rounded-2xl border border-(--color-border) bg-(--color-bg-card) shadow-[0_2px_8px_var(--color-card-shadow)] transition-all duration-300 hover:shadow-[0_8px_24px_var(--color-card-shadow-hover)] hover:-translate-y-1 ${
           featured ? "ring-2 ring-(--color-accent)/30" : ""
         }`}
       >
@@ -42,21 +42,21 @@ export function PostCard({
             />
           </div>
         )}
-        <div className="p-5">
+        <div className="flex flex-1 flex-col p-5">
           <div className="mb-3 flex items-center gap-2">
             <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${cat.color}`}>
               {cat.label}
             </span>
             <span className="text-xs text-(--color-text-muted)">{formatDate(date)}</span>
           </div>
-          <h3 className="mb-2 text-lg font-semibold leading-snug text-(--color-text) transition-colors group-hover:text-(--color-accent)">
+          <h3 className="mb-2 text-lg font-semibold leading-snug text-(--color-text) transition-colors group-hover:text-(--color-accent) line-clamp-1">
             {title}
           </h3>
-          <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-(--color-text-secondary)">
+          <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-(--color-text-secondary) flex-1">
             {description}
           </p>
           {tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1.5 mt-auto">
               {tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}

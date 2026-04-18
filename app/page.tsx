@@ -16,31 +16,25 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-5xl px-6">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-(--color-gradient-from)/10 via-(--color-gradient-via)/5 to-transparent rounded-3xl" />
-        <div className="max-w-2xl">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">
-            <span className="bg-gradient-to-r from-(--color-gradient-from) via-(--color-gradient-via) to-(--color-gradient-to) bg-clip-text text-transparent">
-              qthink
-            </span>
-          </h1>
-          <p className="mb-2 text-xl text-(--color-text-secondary)">
-            思考 · 记录 · 分享
-          </p>
-          <p className="text-base leading-relaxed text-(--color-text-muted)">
-            一个关于技术、生活与思考的个人博客。在这里记录学习的过程、生活的感悟，以及对世界的独立思考。
-          </p>
-        </div>
-      </section>
-
-      {/* Category Chips */}
-      <section className="mb-12">
-        <div className="flex flex-wrap gap-3">
+      <section className="relative overflow-hidden rounded-3xl py-10 px-8 my-8">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-(--color-gradient-from)/10 via-(--color-gradient-via)/5 to-transparent" />
+        <h1 className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl">
+          <span className="bg-gradient-to-r from-(--color-gradient-from) via-(--color-gradient-via) to-(--color-gradient-to) bg-clip-text text-transparent">
+            qthink
+          </span>
+        </h1>
+        <p className="mb-1 text-lg text-(--color-text-secondary)">
+          思考 · 记录 · 分享
+        </p>
+        <p className="mb-5 max-w-xl text-sm leading-relaxed text-(--color-text-muted)">
+          一个关于技术、生活与思考的个人博客。在这里记录学习的过程、生活的感悟，以及对世界的独立思考。
+        </p>
+        <div className="flex flex-wrap gap-2">
           {Object.entries(categoryMap).map(([key, { label, color }]) => (
             <Link
               key={key}
               href={`/categories/${key}`}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-transform hover:scale-105 ${color}`}
+              className={`rounded-full px-3.5 py-1 text-sm font-medium transition-transform hover:scale-105 ${color}`}
             >
               {label}
             </Link>
